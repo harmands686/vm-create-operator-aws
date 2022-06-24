@@ -1,0 +1,23 @@
+---
+- name: terraform init
+  shell: terraform init -reconfigure
+  register: ps
+  args:
+    chdir: terraform/
+- debug: var=ps.stdout_lines
+- name: generate terraform plan
+  shell: terraform plan -out plan.out
+  args:
+    chdir: terraform/
+- name: generate terraform plan
+  shell: terraform show plan.out
+  register: ps
+  args:
+    chdir: terraform/
+- debug: var=ps.stdout_lines                         
+- name: apply terraform script
+  shell: terraform apply plan.out
+  register: ps
+  args:
+    chdir: terraform/
+- debug: var=ps.stdout_lines

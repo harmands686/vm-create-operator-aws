@@ -1,0 +1,8 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: postman-role
+rules:
+- apiGroups: ["my-operator-group.my-operator-domain.com"] # "" indicates the core API group
+  resources: ["vmcrtoperators","vmcrtoperator"]
+  verbs: ["get", "watch", "list", "create", "update", "delete"]
